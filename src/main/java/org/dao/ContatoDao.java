@@ -104,4 +104,40 @@ public class ContatoDao {
         }
         return contatosBuscados;
     }
+
+    public static List<Contato> buscarPorListaID(ArrayList<Integer> ids) {
+        String command = """
+            SELECT id, nome, numero
+            FROM contatos
+            WHERE id = ?
+            """;
+
+        List<Contato> contatosBuscados = new ArrayList<>();
+
+        try(Connection conn = ConnectionFactory.conectar();
+            PreparedStatement stmt = conn.prepareStatement(command)) {
+
+                for (Contato contato : listar()) {
+                    for (Integer id : ids) {
+                        if (contato.getId() == id) {
+                            stmt.setInt(1, id);
+
+                            ResultSet rs = stmt.executeQuery();
+
+                            while(rs.next()) {
+                                Contato contatos = new Contato();
+                                contatos.setId(rs.getInt("id"));
+                                contato.setNome(rs.getString("nome"));
+                                contato.setNumero(rs.getString("numero"));
+                                contatosBuscados.add(contato);
+                            }
+                        }
+                    }
+                }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contatosBuscados;
+    }
 }

@@ -2,6 +2,7 @@ package org;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import org.model.Contato;
 import org.dao.ContatoDao;
@@ -41,6 +42,10 @@ public class Main {
             }
             case 4 :{
                 BuscarContatoPorNome();
+                break;
+            }
+            case 5 :{
+                BuscarContatosPorListaDeID();
                 break;
             }
             }
@@ -118,5 +123,22 @@ public class Main {
         } else {
             System.out.println("Contato não encontrado!");
         }
+    }
+
+    public static void BuscarContatosPorListaDeID() {
+        ArrayList<Integer> ids = new ArrayList<>();
+        boolean continuarLista = true;
+
+        while(continuarLista) {
+            System.out.print("Digite um id para buscar (Um id por vez. Quando digitar todos os ids, digite '0'): ");
+            int id = SC.nextInt();
+            ids.add(id);
+
+            if (id == 0) {
+                continuarLista = false;
+            }
+        }
+
+        System.out.println(ContatoDao.buscarPorListaID(ids));
     }
 }
