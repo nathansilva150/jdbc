@@ -65,7 +65,7 @@ public class ContatoDao {
                 String nome = rs.getString("nome");
                 String numero = rs.getString("numero");
 
-                Contato contato = new Contato(id, nome, numero);
+                var contato = new Contato(id, nome, numero);
                 contatos.add(contato);
             }
         } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class ContatoDao {
             ResultSet rs = stmt.executeQuery();
 
         while(rs.next()) {
-            Contato contato = new Contato();
+            var contato = new Contato();
             contato.setId(rs.getInt("id"));
             contato.setNome(rs.getString("nome"));
             contato.setNumero(rs.getString("numero"));
@@ -141,7 +141,7 @@ public class ContatoDao {
                             ResultSet rs = stmt.executeQuery();
 
                             while(rs.next()) {
-                                Contato contatos = new Contato();
+                                var contatos = new Contato();
                                 contatos.setId(rs.getInt("id"));
                                 contato.setNome(rs.getString("nome"));
                                 contato.setNumero(rs.getString("numero"));
