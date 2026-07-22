@@ -74,6 +74,23 @@ public class ContatoDao {
         return contatos;
     }
 
+    public static void deletar(int id) throws SQLException {
+        String command = """
+                DELETE FROM contatos
+                WHERE id = ?
+                """;
+
+        try (Connection conn = ConnectionFactory.conectar();
+        PreparedStatement stmt = conn.prepareStatement(command)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Contato> BuscarPorNome(String nome) {
         String command = """
                 SELECT id, nome, numero

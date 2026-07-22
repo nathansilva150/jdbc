@@ -20,10 +20,11 @@ public class Main {
                 1 -> Cadastrar
                 2 -> Editar
                 3 -> Listar
-                4 -> Buscar por nome
-                5 -> Retornar lista de contatos por ID
-                Escolha uma opção: 
+                4 -> Deletar
+                5 -> Buscar por nome
+                6 -> Retornar lista de contatos por ID
                 """);
+            System.out.print("Escolha uma opção: ");
         int opcao = SC.nextInt();
         SC.nextLine();
 
@@ -41,11 +42,15 @@ public class Main {
                 break;
             }
             case 4 :{
-                BuscarContatoPorNome();
+                deletarContato();
                 break;
             }
             case 5 :{
-                BuscarContatosPorListaDeID();
+                buscarContatoPorNome();
+                break;
+            }
+            case 6 :{
+                buscarContatosPorListaDeID();
                 break;
             }
             }
@@ -102,13 +107,25 @@ public class Main {
 
     }
 
+    public static void deletarContato() {
+        System.out.print("Digite o ID do contato que deseja remover: ");
+        int idRemocao = SC.nextInt();
+
+        try {
+            ContatoDao.deletar(idRemocao);
+            System.out.println("Usuário deletado!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void listarContato() {
         for(Contato contato : ContatoDao.listar()) {
             System.out.println(contato);
         }
     }
 
-    public static void BuscarContatoPorNome() {
+    public static void buscarContatoPorNome() {
         System.out.print("Digite o nome do contato que deseja buscar: ");
         String nome = SC.nextLine();
 
@@ -125,12 +142,12 @@ public class Main {
         }
     }
 
-    public static void BuscarContatosPorListaDeID() {
+    public static void buscarContatosPorListaDeID() {
         ArrayList<Integer> ids = new ArrayList<>();
         boolean continuarLista = true;
 
         while(continuarLista) {
-            System.out.print("Digite um id para buscar (Um id por vez. Quando digitar todos os ids, digite '0'): ");
+            System.out.print("Digite um ID para buscar (Um id por vez. Quando digitar todos os IDs, digite '0'): ");
             int id = SC.nextInt();
             ids.add(id);
 
