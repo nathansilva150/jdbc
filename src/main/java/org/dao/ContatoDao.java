@@ -44,9 +44,8 @@ public class ContatoDao {
                 stmt.setInt(3, id);
                 stmt.executeUpdate();
 
-        } catch(SQLException e) {
-                e.printStackTrace();
-        }
+            }
+
     }
 
     public static List<Contato> listar() {
@@ -55,6 +54,7 @@ public class ContatoDao {
                 FROM contatos
                 """;
         List<Contato> contatos = new ArrayList<>();
+
         try(Connection conn = ConnectionFactory.conectar();
             PreparedStatement stmt = conn.prepareStatement(command)) {
             
@@ -86,9 +86,7 @@ public class ContatoDao {
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        } 
     }
 
     public List<Contato> BuscarPorNome(String nome) {
