@@ -15,6 +15,9 @@ public class Main {
     }
 
     public static void inicio() {
+
+        boolean sair = false;
+
         System.out.print("""
                 Lista de contato
                 1 -> Cadastrar
@@ -23,6 +26,7 @@ public class Main {
                 4 -> Deletar
                 5 -> Buscar por nome
                 6 -> Retornar lista de contatos por ID
+                0 -> Encerrar programa
                 """);
             System.out.print("Escolha uma opção: ");
         int opcao = SC.nextInt();
@@ -53,6 +57,13 @@ public class Main {
                 buscarContatosPorListaDeID();
                 break;
             }
+            case 0 :{
+                sair = true;
+                break;
+            }
+            }
+            if(!sair) {
+                inicio();
             }
         }
     

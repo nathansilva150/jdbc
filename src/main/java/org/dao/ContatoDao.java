@@ -101,8 +101,7 @@ public class ContatoDao {
         try(Connection conn = ConnectionFactory.conectar();
             PreparedStatement stmt = conn.prepareStatement(command)) {
 
-                stmt.setString(1, "%" + nome + "%");
-
+            stmt.setString(1, "%" + nome + "%");
             ResultSet rs = stmt.executeQuery();
 
         while(rs.next()) {
